@@ -1,0 +1,39 @@
+{
+    "name": "cetver/yii2-validation-filters",
+    "description": "Validation filters for the Yii framework 2.0",
+    "type": "yii2-extension",
+    "keywords": ["yii2","validation","filter","filters"],
+    "license": "BSD-3-Clause",
+    "support": {
+        "source": "https://github.com/cetver/yii2-validation-filters",
+        "issues": "https://github.com/cetver/yii2-validation-filters/issues"
+    },
+    "authors": [
+        {
+            "name": "Alexandr Cetvertacov",
+            "email": "cetver@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-mbstring": "*",
+        "yiisoft/yii2": "~2.0.0",
+        "npm-asset/locutus": "^2.0"
+    },
+    "require-dev": {
+        "codeception/base": "^2.2",
+        "bower-asset/qunit": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "cetver\\ValidationFilters\\": ""
+        }
+    },
+    "config": {
+        "fxp-asset": {
+            "installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        }
+    }
+}
