@@ -192,7 +192,7 @@ Tests
 -----
 
 ```
-composer create-project cetver/yii2-validation-filters
+composer create-project --prefer-source cetver/yii2-validation-filters
 ```
 
 ### PHP
