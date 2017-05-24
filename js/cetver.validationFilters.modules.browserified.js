@@ -15,7 +15,7 @@ function mb_convert_case(str, mode) {
         case 1: // MB_CASE_LOWER
             return str.toLowerCase();
         case 2: // MB_CASE_TITLE
-            return str.toLowerCase().replace(/^(.)|\s(.)/g, function ($1) {
+            return str.toLowerCase().replace(/^(.)|\s+(.)/g, function ($1) {
                 return $1.toUpperCase();
             });
     }
