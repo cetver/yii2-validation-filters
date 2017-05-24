@@ -201,13 +201,13 @@ QUnit.test('mb_convert_case', function (assert) {
     cetver.validationFilters.mb_convert_case($form, attribute, options);
     assert.strictEqual($input.val(), 'Привет Мир', '"ПРИВЕТ МИР" -> "Привет Мир"');
 
-    $input.val('hello   world');
+    $input.val('hello  world');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Hello   World', '"hello   world" -> "Hello   World"');
+    assert.strictEqual($input.val(), 'Hello  World', '"hello  world" -> "Hello  World"');
 
-    $input.val('привет   мир');
+    $input.val('привет  мир');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Привет   Мир', '"привет   мир" -> "Привет   Мир"');
+    assert.strictEqual($input.val(), 'Привет  Мир', '"привет  мир" -> "Привет  Мир"');
 
     options.mode = 'invalid mode';
     assert.throws(
