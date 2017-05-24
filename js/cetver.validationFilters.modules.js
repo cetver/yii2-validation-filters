@@ -10,11 +10,9 @@ function mb_convert_case(str, mode) {
         default:
             throw Error('The "mode" argument can have one of the following values: 0, 1, 2');
         case 0: // MB_CASE_UPPER
-            var strtoupper = require('../../../npm/locutus/php/strings/strtoupper');
-            return strtoupper(str);
+            return str.toUpperCase();
         case 1: // MB_CASE_LOWER
-            var strtolower = require('../../../npm/locutus/php/strings/strtolower');
-            return strtolower(str);
+            return str.toLowerCase();
         case 2: // MB_CASE_TITLE
             return str.toLowerCase().replace(/^(.)|\s(.)/g, function ($1) {
                 return $1.toUpperCase();

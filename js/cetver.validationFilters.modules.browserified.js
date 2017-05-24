@@ -11,11 +11,9 @@ function mb_convert_case(str, mode) {
         default:
             throw Error('The "mode" argument can have one of the following values: 0, 1, 2');
         case 0: // MB_CASE_UPPER
-            var strtoupper = require('../../../npm/locutus/php/strings/strtoupper');
-            return strtoupper(str);
+            return str.toUpperCase();
         case 1: // MB_CASE_LOWER
-            var strtolower = require('../../../npm/locutus/php/strings/strtolower');
-            return strtolower(str);
+            return str.toLowerCase();
         case 2: // MB_CASE_TITLE
             return str.toLowerCase().replace(/^(.)|\s(.)/g, function ($1) {
                 return $1.toUpperCase();
@@ -30,7 +28,7 @@ module.exports.ucfirst = require('../../../npm/locutus/php/strings/ucfirst');
 module.exports.lcfirst = require('../../../npm/locutus/php/strings/lcfirst');
 module.exports.mb_convert_case = mb_convert_case;
 
-},{"../../../npm/locutus/php/strings/lcfirst":2,"../../../npm/locutus/php/strings/ltrim":3,"../../../npm/locutus/php/strings/rtrim":4,"../../../npm/locutus/php/strings/strtolower":5,"../../../npm/locutus/php/strings/strtoupper":6,"../../../npm/locutus/php/strings/trim":7,"../../../npm/locutus/php/strings/ucfirst":8}],2:[function(require,module,exports){
+},{"../../../npm/locutus/php/strings/lcfirst":2,"../../../npm/locutus/php/strings/ltrim":3,"../../../npm/locutus/php/strings/rtrim":4,"../../../npm/locutus/php/strings/trim":5,"../../../npm/locutus/php/strings/ucfirst":6}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function lcfirst(str) {
@@ -87,32 +85,6 @@ module.exports = function rtrim(str, charlist) {
 },{}],5:[function(require,module,exports){
 'use strict';
 
-module.exports = function strtolower(str) {
-  //  discuss at: http://locutus.io/php/strtolower/
-  // original by: Kevin van Zonneveld (http://kvz.io)
-  // improved by: Onno Marsman (https://twitter.com/onnomarsman)
-  //   example 1: strtolower('Kevin van Zonneveld')
-  //   returns 1: 'kevin van zonneveld'
-
-  return (str + '').toLowerCase();
-};
-
-},{}],6:[function(require,module,exports){
-'use strict';
-
-module.exports = function strtoupper(str) {
-  //  discuss at: http://locutus.io/php/strtoupper/
-  // original by: Kevin van Zonneveld (http://kvz.io)
-  // improved by: Onno Marsman (https://twitter.com/onnomarsman)
-  //   example 1: strtoupper('Kevin van Zonneveld')
-  //   returns 1: 'KEVIN VAN ZONNEVELD'
-
-  return (str + '').toUpperCase();
-};
-
-},{}],7:[function(require,module,exports){
-'use strict';
-
 module.exports = function trim(str, charlist) {
   //  discuss at: http://locutus.io/php/trim/
   // original by: Kevin van Zonneveld (http://kvz.io)
@@ -159,7 +131,7 @@ module.exports = function trim(str, charlist) {
   return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
 };
 
-},{}],8:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 module.exports = function ucfirst(str) {
