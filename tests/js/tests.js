@@ -1,9 +1,9 @@
 var $form = $('<form></form>');
-var $input = $('<input id="input">');
+var $textarea = $('<textarea id="textarea"></textarea>');
 var attribute = {
-    input: '#input'
+    input: '#textarea'
 };
-$form.append($input);
+$form.append($textarea);
 
 QUnit.test('The existence of methods', function (assert) {
     assert.strictEqual(typeof cetver, 'object', 'Object "cetver" exists');
@@ -80,26 +80,26 @@ QUnit.test('trim', function (assert) {
         characterMask: ' \t\n\r\u0000\u000b'
     };
 
-    $input.val(' hello world ');
+    $textarea.val(' hello world ');
     cetver.validationFilters.trim($form, attribute, options);
-    assert.strictEqual($input.val(), 'hello world', '" hello world " -> "hello world"');
+    assert.strictEqual($textarea.val(), 'hello world', '" hello world " -> "hello world"');
 
-    $input.val(' привет мир ');
+    $textarea.val(' привет мир ');
     cetver.validationFilters.trim($form, attribute, options);
-    assert.strictEqual($input.val(), 'привет мир', '" привет мир " -> "привет мир"');
+    assert.strictEqual($textarea.val(), 'привет мир', '" привет мир " -> "привет мир"');
 
-    $input.val(' \t\n\r\u0000\u000bhello world \t\n\r\u0000\u000b');
+    $textarea.val(' \t\n\r\u0000\u000bhello world \t\n\r\u0000\u000b');
     cetver.validationFilters.trim($form, attribute, options);
     assert.strictEqual(
-        $input.val(),
+        $textarea.val(),
         'hello world',
         '" \\t\\n\\r\\u0000\\u000bhello world \\t\\n\\r\\u0000\\u000b" -> "hello world"'
     );
 
-    $input.val('hello world');
+    $textarea.val('hello world');
     options.characterMask = 'helloworld';
     cetver.validationFilters.trim($form, attribute, options);
-    assert.strictEqual($input.val(), ' ', '"hello world" -> " "');
+    assert.strictEqual($textarea.val(), ' ', '"hello world" -> " "');
 });
 
 QUnit.test('ltrim', function (assert) {
@@ -107,26 +107,26 @@ QUnit.test('ltrim', function (assert) {
         characterMask: ' \t\n\r\u0000\u000b'
     };
 
-    $input.val(' hello world');
+    $textarea.val(' hello world');
     cetver.validationFilters.ltrim($form, attribute, options);
-    assert.strictEqual($input.val(), 'hello world', '" hello world" -> "hello world"');
+    assert.strictEqual($textarea.val(), 'hello world', '" hello world" -> "hello world"');
 
-    $input.val(' привет мир');
+    $textarea.val(' привет мир');
     cetver.validationFilters.ltrim($form, attribute, options);
-    assert.strictEqual($input.val(), 'привет мир', '" привет мир" -> "привет мир"');
+    assert.strictEqual($textarea.val(), 'привет мир', '" привет мир" -> "привет мир"');
 
-    $input.val(' \t\n\r\u0000\u000bhello world');
+    $textarea.val(' \t\n\r\u0000\u000bhello world');
     cetver.validationFilters.ltrim($form, attribute, options);
     assert.strictEqual(
-        $input.val(),
+        $textarea.val(),
         'hello world',
         '" \\t\\n\\r\\u0000\\u000bhello world" -> "hello world"'
     );
 
-    $input.val('hello world');
+    $textarea.val('hello world');
     options.characterMask = 'hello';
     cetver.validationFilters.ltrim($form, attribute, options);
-    assert.strictEqual($input.val(), ' world', '"hello world" -> " world"');
+    assert.strictEqual($textarea.val(), ' world', '"hello world" -> " world"');
 });
 
 QUnit.test('rtrim', function (assert) {
@@ -134,26 +134,26 @@ QUnit.test('rtrim', function (assert) {
         characterMask: ' \t\n\r\u0000\u000b'
     };
 
-    $input.val('hello world ');
+    $textarea.val('hello world ');
     cetver.validationFilters.rtrim($form, attribute, options);
-    assert.strictEqual($input.val(), 'hello world', '"hello world " -> "hello world"');
+    assert.strictEqual($textarea.val(), 'hello world', '"hello world " -> "hello world"');
 
-    $input.val('привет мир ');
+    $textarea.val('привет мир ');
     cetver.validationFilters.rtrim($form, attribute, options);
-    assert.strictEqual($input.val(), 'привет мир', '"привет мир " -> "привет мир"');
+    assert.strictEqual($textarea.val(), 'привет мир', '"привет мир " -> "привет мир"');
 
-    $input.val('hello world \t\n\r\u0000\u000b');
+    $textarea.val('hello world \t\n\r\u0000\u000b');
     cetver.validationFilters.rtrim($form, attribute, options);
     assert.strictEqual(
-        $input.val(),
+        $textarea.val(),
         'hello world',
         '"hello world \\t\\n\\r\\u0000\\u000b" -> "hello world"'
     );
 
-    $input.val('hello world');
+    $textarea.val('hello world');
     options.characterMask = 'world';
     cetver.validationFilters.rtrim($form, attribute, options);
-    assert.strictEqual($input.val(), 'hello ', '"hello world" -> "hello "');
+    assert.strictEqual($textarea.val(), 'hello ', '"hello world" -> "hello "');
 });
 
 QUnit.test('mb_convert_case', function (assert) {
@@ -165,49 +165,49 @@ QUnit.test('mb_convert_case', function (assert) {
     var options = {
         mode: modes.MB_CASE_UPPER
     };
-    $input.val('hello world');
+    $textarea.val('hello world');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'HELLO WORLD', '"hello world" -> "HELLO WORLD"');
+    assert.strictEqual($textarea.val(), 'HELLO WORLD', '"hello world" -> "HELLO WORLD"');
 
-    $input.val('привет мир');
+    $textarea.val('привет мир');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'ПРИВЕТ МИР', '"привет мир" -> "ПРИВЕТ МИР"');
+    assert.strictEqual($textarea.val(), 'ПРИВЕТ МИР', '"привет мир" -> "ПРИВЕТ МИР"');
 
     options.mode = modes.MB_CASE_LOWER;
 
-    $input.val('HELLO WORLD');
+    $textarea.val('HELLO WORLD');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'hello world', '"HELLO WORLD" -> "hello world"');
+    assert.strictEqual($textarea.val(), 'hello world', '"HELLO WORLD" -> "hello world"');
 
-    $input.val('ПРИВЕТ МИР');
+    $textarea.val('ПРИВЕТ МИР');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'привет мир', '"ПРИВЕТ МИР" -> "привет мир"');
+    assert.strictEqual($textarea.val(), 'привет мир', '"ПРИВЕТ МИР" -> "привет мир"');
 
     options.mode = modes.MB_CASE_TITLE;
 
-    $input.val('hello world');
+    $textarea.val('hello world');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Hello World', '"hello world" -> "Hello World"');
+    assert.strictEqual($textarea.val(), 'Hello World', '"hello world" -> "Hello World"');
 
-    $input.val('HELLO WORLD');
+    $textarea.val('HELLO WORLD');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Hello World', '"HELLO WORLD" -> "Hello World"');
+    assert.strictEqual($textarea.val(), 'Hello World', '"HELLO WORLD" -> "Hello World"');
 
-    $input.val('привет мир');
+    $textarea.val('привет мир');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Привет Мир', '"привет мир" -> "Привет Мир"');
+    assert.strictEqual($textarea.val(), 'Привет Мир', '"привет мир" -> "Привет Мир"');
 
-    $input.val('ПРИВЕТ МИР');
+    $textarea.val('ПРИВЕТ МИР');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Привет Мир', '"ПРИВЕТ МИР" -> "Привет Мир"');
+    assert.strictEqual($textarea.val(), 'Привет Мир', '"ПРИВЕТ МИР" -> "Привет Мир"');
 
-    $input.val('hello  world');
+    $textarea.val('hello  world');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Hello  World', '"hello  world" -> "Hello  World"');
+    assert.strictEqual($textarea.val(), 'Hello  World', '"hello  world" -> "Hello  World"');
 
-    $input.val('привет  мир');
+    $textarea.val('привет  мир');
     cetver.validationFilters.mb_convert_case($form, attribute, options);
-    assert.strictEqual($input.val(), 'Привет  Мир', '"привет  мир" -> "Привет  Мир"');
+    assert.strictEqual($textarea.val(), 'Привет  Мир', '"привет  мир" -> "Привет  Мир"');
 
     options.mode = 'invalid mode';
     assert.throws(
@@ -220,21 +220,21 @@ QUnit.test('mb_convert_case', function (assert) {
 });
 
 QUnit.test('ucfirst', function (assert) {
-    $input.val('hello world');
+    $textarea.val('hello world');
     cetver.validationFilters.ucfirst($form, attribute);
-    assert.strictEqual($input.val(), 'Hello world', '"hello world" -> "Hello world"');
+    assert.strictEqual($textarea.val(), 'Hello world', '"hello world" -> "Hello world"');
 
-    $input.val('привет мир');
+    $textarea.val('привет мир');
     cetver.validationFilters.ucfirst($form, attribute);
-    assert.strictEqual($input.val(), 'Привет мир', '"привет мир" -> "Привет мир"');
+    assert.strictEqual($textarea.val(), 'Привет мир', '"привет мир" -> "Привет мир"');
 });
 
 QUnit.test('lcfirst', function (assert) {
-    $input.val('HELLO WORLD');
+    $textarea.val('HELLO WORLD');
     cetver.validationFilters.lcfirst($form, attribute);
-    assert.strictEqual($input.val(), 'hELLO WORLD', '"HELLO WORLD" -> "hELLO WORLD"');
+    assert.strictEqual($textarea.val(), 'hELLO WORLD', '"HELLO WORLD" -> "hELLO WORLD"');
 
-    $input.val('ПРИВЕТ МИР');
+    $textarea.val('ПРИВЕТ МИР');
     cetver.validationFilters.lcfirst($form, attribute);
-    assert.strictEqual($input.val(), 'пРИВЕТ МИР', '"ПРИВЕТ МИР" -> "пРИВЕТ МИР"');
+    assert.strictEqual($textarea.val(), 'пРИВЕТ МИР', '"ПРИВЕТ МИР" -> "пРИВЕТ МИР"');
 });

@@ -4,6 +4,9 @@ This extension provides a validation filters for the [Yii framework 2.0](http://
 
 For license information check the [LICENSE](LICENSE)-file.
 
+[![Build Status](https://travis-ci.org/cetver/yii2-validation-filters.svg?branch=master)](https://travis-ci.org/cetver/yii2-validation-filters)
+[![Coverage Status](https://coveralls.io/repos/github/cetver/yii2-validation-filters/badge.svg?branch=master)](https://coveralls.io/github/cetver/yii2-validation-filters)
+
 Installation
 ------------
 
