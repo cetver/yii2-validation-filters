@@ -14,8 +14,7 @@ install:
   - travis_retry composer update --dev --prefer-dist --no-interaction
 
 before_script:
-  - echo 'mbstring.internal_encoding = "UTF-8"' >> ~/.phpenv/versions/5.4/etc/conf.d/travis.ini
-  - echo 'mbstring.internal_encoding = "UTF-8"' >> ~/.phpenv/versions/5.5/etc/conf.d/travis.ini
+  - echo 'mbstring.internal_encoding = "UTF-8"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   # js tests
   - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
   - npm install grunt grunt-contrib-qunit
