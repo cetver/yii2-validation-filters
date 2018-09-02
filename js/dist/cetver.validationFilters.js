@@ -1,9 +1,15 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g=(g.cetver||(g.cetver = {}));g=(g.validationFilters||(g.validationFilters = {}));g.php = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g=(g.cetver||(g.cetver = {}));g=(g.validationFilters||(g.validationFilters = {}));g.php = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 /**
- * Command for generation browserified file:
- * browserify cetver.validationFilters.modules.js --standalone cetver.validationFilters.php --outfile cetver.validationFilters.modules.browserified.js
+ * Performs case folding on a string, converted in the way specified by mode.
+ *
+ * @param {string} str The string being converted.
+ * @param {number} mode The mode of the conversion. It can be one of:
+ * - 0: MB_CASE_UPPER
+ * - 1: MB_CASE_LOWER
+ * - 2: MB_CASE_TITLE
+ *
+ * @returns {string}
  */
-
 function mb_convert_case(str, mode) {
     str += '';
     mode = Number(mode);
@@ -21,14 +27,14 @@ function mb_convert_case(str, mode) {
     }
 }
 
-module.exports.ltrim = require('../../../npm/locutus/php/strings/ltrim');
-module.exports.trim = require('../../../npm/locutus/php/strings/trim');
-module.exports.rtrim = require('../../../npm/locutus/php/strings/rtrim');
-module.exports.ucfirst = require('../../../npm/locutus/php/strings/ucfirst');
-module.exports.lcfirst = require('../../../npm/locutus/php/strings/lcfirst');
+module.exports.ltrim = require('../../vendor/npm-asset/locutus/php/strings/ltrim');
+module.exports.trim = require('../../vendor/npm-asset/locutus/php/strings/trim');
+module.exports.rtrim = require('../../vendor/npm-asset/locutus/php/strings/rtrim');
+module.exports.ucfirst = require('../../vendor/npm-asset/locutus/php/strings/ucfirst');
+module.exports.lcfirst = require('../../vendor/npm-asset/locutus/php/strings/lcfirst');
 module.exports.mb_convert_case = mb_convert_case;
 
-},{"../../../npm/locutus/php/strings/lcfirst":2,"../../../npm/locutus/php/strings/ltrim":3,"../../../npm/locutus/php/strings/rtrim":4,"../../../npm/locutus/php/strings/trim":5,"../../../npm/locutus/php/strings/ucfirst":6}],2:[function(require,module,exports){
+},{"../../vendor/npm-asset/locutus/php/strings/lcfirst":2,"../../vendor/npm-asset/locutus/php/strings/ltrim":3,"../../vendor/npm-asset/locutus/php/strings/rtrim":4,"../../vendor/npm-asset/locutus/php/strings/trim":5,"../../vendor/npm-asset/locutus/php/strings/ucfirst":6}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function lcfirst(str) {
@@ -149,3 +155,48 @@ module.exports = function ucfirst(str) {
 
 },{}]},{},[1])(1)
 });
+
+(function ($) {
+    function getInputValue($form, attribute, callback) {
+        var $input = $form.find(attribute.input);
+        var value = $input.val();
+        value = callback(value);
+        $input.val(value);
+        return value;
+    }
+
+    var php = cetver.validationFilters.php;
+
+    $.extend(cetver.validationFilters, {
+        trim: function ($form, attribute, options) {
+            return getInputValue($form, attribute, function (value) {
+                return php.trim(value, options.characterMask);
+            });
+        },
+        ltrim: function ($form, attribute, options) {
+            return getInputValue($form, attribute, function (value) {
+                return php.ltrim(value, options.characterMask);
+            });
+        },
+        rtrim: function ($form, attribute, options) {
+            return getInputValue($form, attribute, function (value) {
+                return php.rtrim(value, options.characterMask);
+            });
+        },
+        mb_convert_case: function ($form, attribute, options) {
+            return getInputValue($form, attribute, function (value) {
+                return php.mb_convert_case(value, options.mode);
+            });
+        },
+        ucfirst: function ($form, attribute) {
+            return getInputValue($form, attribute, function (value) {
+                return php.ucfirst(value);
+            });
+        },
+        lcfirst: function ($form, attribute) {
+            return getInputValue($form, attribute, function (value) {
+                return php.lcfirst(value);
+            });
+        }
+    });
+})(jQuery);

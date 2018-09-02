@@ -12,18 +12,13 @@ class ValidationAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@cetver/ValidationFilters/js';
+    public $sourcePath = '@cetver/ValidationFilters/js/dist';
     /**
      * @inheritdoc
      */
-    public $js = [
-        'cetver.validationFilters.modules.browserified.js',
-        'cetver.validationFilters.validation.js',
-    ];
+    public $js = ['cetver.validationFilters.min.js'];
     /**
      * @inheritdoc
      */
-    public $depends = [
-        'yii\validators\ValidationAsset',
-    ];
+    public $depends = ['yii\validators\ValidationAsset'];
 }

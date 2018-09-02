@@ -207,6 +207,15 @@ php vendor/bin/codecept run --config tests/php/codeception.yml unit
 ### JavaScript
 Open in browser `yii2-validation-filters/tests/js/index.html`
 
+or
+
+```
+cd yii2-validation-filters
+npm install
+npm run build
+npm run test
+```
+
 Credits
 -------
 

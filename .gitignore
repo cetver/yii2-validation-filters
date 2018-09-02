@@ -1,0 +1,5 @@
+.idea/
+node_modules/
+vendor/
+tests/php/tests/_output/
+tests/php/tests/_support/_generated/
