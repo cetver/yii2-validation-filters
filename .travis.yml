@@ -1,21 +1,49 @@
+dist: xenial
+
+# faster builds on new travis setup not using sudo
+sudo: false
+
+group: edge
+
 language: php
 
-php:
-  - '5.4'
-  - '5.5'
-  - '5.6'
-  - '7.0'
-  - '7.1'
+env:
+  global:
+    - COMPOSER_UPDATE="--prefer-dist --no-interaction --no-progress --optimize-autoloader"
+    - COMPOSER_CONFIG="--global github-oauth.github.com b7244dc99194b22416d5ce46d511ce04049b23de"
+
+# cache vendor dirs
+cache:
+  directories:
+    - vendor
+    - node_modules
+    - $HOME/.composer/cache
+    - $HOME/.npm
+
+matrix:
+  fast_finish: true
+  include:
+    - php: "7.4"
+    - php: "7.3"
+    - php: "7.2"
+    - php: "7.1"
+    - php: "7.0"
+    - php: "5.6"
+    - php: "5.5"
+      dist: trusty
+    - php: "5.4"
+      dist: trusty
 
 install:
   - travis_retry composer self-update
-  - travis_retry composer config --global github-oauth.github.com b7244dc99194b22416d5ce46d511ce04049b23de
-  - travis_retry composer update --prefer-dist --no-interaction
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - travis_retry composer config $COMPOSER_CONFIG
+  - travis_retry composer update $COMPOSER_UPDATE
 
 before_script:
   - echo 'mbstring.internal_encoding = "UTF-8"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   # prepare JS
-  - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+  - wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
   - npm install
   - npm run build
 
@@ -23,12 +51,3 @@ script:
   - vendor/bin/codecept run --config tests/php/codeception.yml unit --coverage-xml
   - vendor/bin/coveralls
   - npm run test
-
-# cache vendor dirs
-cache:
-  directories:
-    - $HOME/.composer/cache
-    - node_modules
-
-# faster builds on new travis setup not using sudo
-sudo: false

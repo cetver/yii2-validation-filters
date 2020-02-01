@@ -16,7 +16,7 @@
     "grunt-contrib-qunit": "^3.0",
     "grunt-contrib-uglify": "^3.4",
     "locutus": "^2.0",
-    "qunitjs": "^2.0"
+    "qunit": "^2.0"
   },
   "scripts": {
     "build": "./node_modules/grunt/bin/grunt --verbose",
